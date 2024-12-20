@@ -1,8 +1,8 @@
-# ⌚ WatchOut
+# ⌚ WatchOut!
 
 We are **WatchOut**, a smartwatch vulnerability analysis team from **BOB (Best of the Best)** in South Korea.
 
-We have developed both a **fuzzer for marformed input** and a **fuzzer for formatted input**, and this fuzzer is the **formatted fuzzer**.
+Our mission is to enhance the security of smartwatches through rigorous research and testing.
 
 # Overview
 
