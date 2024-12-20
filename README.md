@@ -1,3 +1,9 @@
+# ⌚ WatchOut
+
+We are **WatchOut**, a smartwatch vulnerability analysis team from **BOB (Best of the Best)** in South Korea.
+
+We have developed both a **fuzzer for marformed input** and a **fuzzer for formatted input**, and this fuzzer is the **formatted fuzzer**.
+
 # Fuzzing Android Services
 
 This repository contains a Python-based fuzzer designed to test Android system services for vulnerabilities by sending fuzzed inputs to transaction codes. The goal of this tool is to discover potential crashes or abnormal behavior in system services, such as `audioserver`.
