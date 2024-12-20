@@ -86,14 +86,6 @@ python fuzz_service.py media.audio_policy 47 100 4
 - Some commands may cause the target service to crash or become unresponsive. Restart the service or device if necessary.
 - The tool includes a termination flag to stop all processes if critical errors are detected (e.g., device disconnects).
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Contributions are welcome! If you find a bug or have an idea for improvement, feel free to open an issue or submit a pull request.
-
 ## Disclaimer
 
 Use this tool at your own risk. The author is not responsible for any damage caused by the use of this software.
