@@ -1,99 +1,94 @@
-Fuzzing Android Services
+# Fuzzing Android Services
 
-This repository contains a Python-based fuzzer designed to test Android system services for vulnerabilities by sending fuzzed inputs to transaction codes. The goal of this tool is to discover potential crashes or abnormal behavior in system services, such as audioserver.
+This repository contains a Python-based fuzzer designed to test Android system services for vulnerabilities by sending fuzzed inputs to transaction codes. The goal of this tool is to discover potential crashes or abnormal behavior in system services, such as `audioserver`.
 
-Features
+## Features
 
-Dynamic Command Generation: Automatically generates fuzz commands with varied argument types and values.
+- **Dynamic Command Generation:** Automatically generates fuzz commands with varied argument types and values.
+- **Parallel Processing:** Uses Python's `concurrent.futures.ProcessPoolExecutor` for parallel execution of fuzz commands.
+- **Crash Detection:** Monitors logcat for crash logs and saves them to a log file when a crash is detected.
+- **Execution Limits:** Allows limiting the number of commands per transaction code for efficient fuzzing.
 
-Parallel Processing: Uses Python's concurrent.futures.ProcessPoolExecutor for parallel execution of fuzz commands.
+## Prerequisites
 
-Crash Detection: Monitors logcat for crash logs and saves them to a log file when a crash is detected.
+- Python 3.8+
+- `adb` (Android Debug Bridge) installed and added to your PATH.
+- A rooted Android device or emulator connected via `adb`.
+- A working Python environment with the following libraries installed:
+  - `concurrent.futures`
+  - `subprocess`
+  - `itertools`
 
-Execution Limits: Allows limiting the number of commands per transaction code for efficient fuzzing.
+## Installation
 
-Prerequisites
+1. Clone the repository:
 
-Python 3.8+
+   ```bash
+   git clone https://github.com/yourusername/android-service-fuzzer.git
+   cd android-service-fuzzer
+   ```
 
-adb (Android Debug Bridge) installed and added to your PATH.
+2. Install dependencies (if not already installed):
 
-A rooted Android device or emulator connected via adb.
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-A working Python environment with the following libraries installed:
+3. Connect your Android device via `adb` and verify the connection:
 
-concurrent.futures
+   ```bash
+   adb devices
+   ```
 
-subprocess
-
-itertools
-
-Installation
-
-Clone the repository:
-
-git clone https://github.com/yourusername/android-service-fuzzer.git
-cd android-service-fuzzer
-
-Install dependencies (if not already installed):
-
-pip install -r requirements.txt
-
-Connect your Android device via adb and verify the connection:
-
-adb devices
-
-Usage
+## Usage
 
 Run the fuzzer with the following command:
 
+```bash
 python fuzz_service.py <service_name> <start_transaction_code> <max_commands_per_code> <num_processes>
+```
 
-Arguments
+### Arguments
 
-<service_name>: The name of the Android service to fuzz (e.g., media.audio_policy).
+- `<service_name>`: The name of the Android service to fuzz (e.g., `media.audio_policy`).
+- `<start_transaction_code>`: The starting transaction code to fuzz (e.g., `1`).
+- `<max_commands_per_code>`: The maximum number of commands to generate per transaction code.
+- `<num_processes>`: The number of parallel processes to use for fuzzing.
 
-<start_transaction_code>: The starting transaction code to fuzz (e.g., 1).
+### Example
 
-<max_commands_per_code>: The maximum number of commands to generate per transaction code.
+To fuzz the `media.audio_policy` service starting from transaction code `47`, generating up to `100` commands per code, using `4` parallel processes:
 
-<num_processes>: The number of parallel processes to use for fuzzing.
-
-Example
-
-To fuzz the media.audio_policy service starting from transaction code 47, generating up to 100 commands per code, using 4 parallel processes:
-
+```bash
 python fuzz_service.py media.audio_policy 47 100 4
+```
 
-Output
+## Output
 
-Logs:
+- **Logs:**
 
-Crash logs are saved in the current directory when a crash is detected.
+  - Crash logs are saved in the current directory when a crash is detected.
+  - Each log includes the executed command and the corresponding crash logs from `adb logcat`.
 
-Each log includes the executed command and the corresponding crash logs from adb logcat.
+- **Terminal Output:**
 
-Terminal Output:
+  - Displays the status of executed commands, including success, errors, and crashes.
 
-Displays the status of executed commands, including success, errors, and crashes.
+## Notes
 
-Notes
+- This tool is experimental and should be used responsibly. Only test on devices or emulators that you own or have explicit permission to test.
+- Some commands may cause the target service to crash or become unresponsive. Restart the service or device if necessary.
+- The tool includes a termination flag to stop all processes if critical errors are detected (e.g., device disconnects).
 
-This tool is experimental and should be used responsibly. Only test on devices or emulators that you own or have explicit permission to test.
+## License
 
-Some commands may cause the target service to crash or become unresponsive. Restart the service or device if necessary.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-The tool includes a termination flag to stop all processes if critical errors are detected (e.g., device disconnects).
-
-License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-Contributing
+## Contributing
 
 Contributions are welcome! If you find a bug or have an idea for improvement, feel free to open an issue or submit a pull request.
 
-Disclaimer
+## Disclaimer
 
 Use this tool at your own risk. The author is not responsible for any damage caused by the use of this software.
 
