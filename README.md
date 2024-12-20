@@ -19,7 +19,7 @@ This repository contains a Python-based fuzzer designed to test Android system s
 
 - Python 3.8+
 - `adb` (Android Debug Bridge) installed and added to your PATH.
-- A rooted Android device or emulator connected via `adb`.
+- Android device or emulator connected via `adb`.
 - A working Python environment with the following libraries installed:
   - `concurrent.futures`
   - `subprocess`
